@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { getActiveUsers } from "../api.js";
 import { Loading,  ActiveUser } from "../components";
 
 import Peer from 'skyway-js';
-const peer = new Peer({key: '78b1f9a5-e016-412c-98e0-e1175640cfe1', debug: 3});
+const peer = new Peer({key: process.env.REACT_APP_SKYWAY_KEY, debug: 3});
 
 
 export function RootPage() {
