@@ -1,5 +1,4 @@
-import {useState, useRef } from "react";
-import { Calling } from "../components";
+import {useState } from "react";
 
 import Peer from 'skyway-js';
 const peer = new Peer({key: process.env.REACT_APP_SKYWAY_KEY, debug: 3});
