@@ -71,12 +71,12 @@ export function RootPage() {
                 ID: {myId}<br />
                 <select id="their-id">
                 {peers.map((peer) => {
-                  return <option value={peer}>{peer}</option>
+                  return <option value={peer} key={peer} >{peer}</option>
                 })}
                 </select>
                 <button onClick={makeCall}>発信</button>
                 <p id="my-id"></p>
-                <video id="my-video" width="400px" autoPlay muted playsInline></video>
+                <video id="my-video" width="400px" autoPlay playsInline></video>
               </h3>
             </div>
           </div>
@@ -98,7 +98,7 @@ export function RootPage() {
                 <span className={"tag is-danger"}>
                   状態: ON
                 </span><br />
-                <video id="their-video" width="400px" autoPlay muted playsInline></video>
+                <video id="their-video" width="400px" autoPlay playsInline></video>
               </h3>
             </div>
           </div>
