@@ -76,7 +76,7 @@ export function RootPage() {
                 </select>
                 <button onClick={makeCall}>発信</button>
                 <p id="my-id"></p>
-                <video id="my-video" width="400px" autoPlay playsInline></video>
+                <video id="my-video" width="400px" autoPlay muted playsInline></video>
               </h3>
             </div>
           </div>
