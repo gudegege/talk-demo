@@ -19,6 +19,7 @@ export function RootPage() {
   const [peers, setPeers] = useState([])
   const [call_stat, setCallStat] = useState(0)
   const [caller_stat, setCallerStat] = useState(0)
+  const [msg, setMsg] = useState("")
   let localStream;
 
   // カメラ映像取得
@@ -66,7 +67,22 @@ export function RootPage() {
       videoElm.srcObject = stream;
     });
   }
-
+  /*
+  // 発信処理
+  const makeClose = () => {
+    peer.on("close", () => {
+      console.log("切断");
+      const remoteVideo = document.getElementById('their-id').value;
+      remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+      remoteVideo.srcObject = null;
+      setMsg("切断しました ")
+    });
+  }
+  */
+  // 切断
+  peer.on('close', () => {
+    setMsg("切断しました ")
+  });
   //着信処理
   peer.on('call', mediaConnection => {
     setCallStat(1)
@@ -76,7 +92,7 @@ export function RootPage() {
       setEventListener(mediaConnection);
       setCallStat(2)
       setCallerStat(2)
-    }, 5000);
+    }, 4000);
   });
 
   return (
@@ -104,8 +120,9 @@ export function RootPage() {
                 </select>
                 <button onClick={makeCall}>発信</button>
                 <p id="my-id"></p>
-                { caller_stat == 1 ? <Calling /> : "" }
+                { caller_stat === 1 ? <Calling /> : "" }
                 <video id="my-video" width="200px" autoPlay muted playsInline style={{display: caller_stat > 1 ? 'block' : 'none' }} ></video>
+                { msg }
               </h3>
             </div>
           </div>
@@ -127,8 +144,9 @@ export function RootPage() {
                 <span className={"tag is-danger"}>
                   状態: ON
                 </span><br />
-                { call_stat == 1 ? <Calling /> : "" }
+                { call_stat === 1 ? <Calling /> : "" }
                 <video id="their-video" width="300px" autoPlay playsInline style={{display: call_stat > 1 ? 'block' : 'none' }}></video>
+                { msg }
               </h3>
             </div>
           </div>
