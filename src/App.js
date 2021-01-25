@@ -1,6 +1,7 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import { RootPage } from "./pages/Root.js";
+import { MoviePage } from "./pages/Movie.js";
 
 function Header() {
   return (
@@ -36,13 +37,14 @@ function App() {
       <Header />
       <section className="section has-background-warning-light">
         <div className="container">
-          <div className="block has-text-right">
-            <button className="button is-warning is-inverted is-outlined">
-              ログイン
-            </button>
-          </div>
+          <Link className="button" to="/"> 音声のみ版 </Link>
+          <Link className="button" to="/movie"> 動画版 </Link>
+          <Link className="button" to="/avator"> アバター版 </Link>
           <Route path="/" exact>
             <RootPage />
+          </Route>
+          <Route path="/movie" exact>
+            <MoviePage />
           </Route>
         </div>
       </section>

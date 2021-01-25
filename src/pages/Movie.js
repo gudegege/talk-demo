@@ -14,17 +14,7 @@ function Calling() {
     </p>
   );
 }
-
-function Talking() {
-  return (
-    <p>
-      会話中
-      <progress className="progress is-large is-info" max="100">60%</progress>
-    </p>
-  )
-}
-
-export function RootPage() {
+export function MoviePage() {
   const [myId, setMyId] = useState('')
   const [peers, setPeers] = useState([])
   const [call_stat, setCallStat] = useState(0)
@@ -33,7 +23,7 @@ export function RootPage() {
   let localStream;
 
   // カメラ映像取得
-  navigator.mediaDevices.getUserMedia({video: false, audio: true})
+  navigator.mediaDevices.getUserMedia({video: true, audio: true})
     .then( stream => {
     // 成功時にvideo要素にカメラ映像をセットし、再生
     const videoElm = document.getElementById('my-video');
@@ -106,7 +96,7 @@ export function RootPage() {
 
   return (
     <>
-      <h2 className="title is-3">音声版テスト</h2>
+      <h2 className="title is-3">動画版テスト</h2>
       <div className="block">
         <article className="box">
           <div className="columns">
@@ -130,7 +120,6 @@ export function RootPage() {
                 <button onClick={makeCall}>発信</button>
                 <p id="my-id"></p>
                 { caller_stat === 1 ? <Calling /> : "" }
-                { caller_stat > 1 ? <Talking /> : "" }
                 <video id="my-video" width="200px" autoPlay muted playsInline style={{display: caller_stat > 1 ? 'block' : 'none' }} ></video>
                 { msg }
               </h3>
@@ -155,7 +144,6 @@ export function RootPage() {
                   状態: ON
                 </span><br />
                 { call_stat === 1 ? <Calling /> : "" }
-                { call_stat > 1 ? <Talking /> : "" }
                 <video id="their-video" width="300px" autoPlay playsInline style={{display: call_stat > 1 ? 'block' : 'none' }}></video>
                 { msg }
               </h3>
